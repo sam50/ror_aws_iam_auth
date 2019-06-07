@@ -4,6 +4,10 @@ This is a very basic Ruby on Rails Application that uses AWS IAM roles to authen
 The method used here - via signed request for AWS STS for sts:GetCallerIdentity request. The authenticated user than gets a JWT token
 The application was created  with `rails new api1 --api` it has a model Users and a scaffold Items 
 
+Here is what happens here
+
+![Schema](schema.png?raw=true "Schema")
+
 
 * Things needed in AWS:
 2 instances, one for client one for server.
