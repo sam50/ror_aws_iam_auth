@@ -25,7 +25,7 @@ class AuthenticateUser
   attr_accessor :name, :iamarn
 
   def user
-    puts "DEBUG #{@iam_http_request_method}, #{@iam_request_url}, #{@iam_request_body}, #{@iam_request_headers}"
+    #puts "DEBUG #{@iam_http_request_method}, #{@iam_request_url}, #{@iam_request_body}, #{@iam_request_headers}"
     iamarn = authenticate_iam
     if iamarn
       user = User.find_by_iamarn(iamarn)
@@ -36,7 +36,11 @@ class AuthenticateUser
     nil
   end
   def authenticate_iam
-    uri = URI.parse(@iam_request_url)
+    # uri = URI.parse(@iam_request_url)
+    # Really? that would be a dump idea, never execute requests to the URLs specified by the client :)
+    # as of right now, there is no great way to check that we are sending request to STS except for knowing this in advance
+    # how Vault people do this - add a configuration option
+    uri = URI.parse("https://sts.amazonaws.com/")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     request = "Net::HTTP::#{@iam_http_request_method.capitalize}".constantize.new(uri.request_uri)
