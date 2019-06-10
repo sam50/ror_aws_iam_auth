@@ -4,12 +4,13 @@ This is a very basic Ruby on Rails Application that uses AWS IAM roles to authen
 The method used here - via signed request for AWS STS for sts:GetCallerIdentity request. The authenticated user than gets a JWT token
 The application was created  with `rails new api1 --api` it has a model Users and a scaffold Items 
 
-Here is what happens here
+Here is what happens here(not exactly, but mainly correct)
 
 ![Schema](schema.png?raw=true "Schema")
 
 
 * Things needed in AWS:
+
 2 instances, one for client one for server.
 IAM role for client instance, assigned as Instance profile during instance creation. Name doesn't matter, also take the IAM role ARN from IAM it looks like `arn:aws:iam::<accountID>:role/<role-name>` be sure to add this ARN when creating user on the server
 Client needs python2.7 and `botocore` package (`pip install botocore`)
@@ -39,6 +40,7 @@ rails s -b 0.0.0.0 3000
 ```
 
 * Client
+
 Written in python, see client/api_client.py a little bit adapted version of sign_requests.py for Vault
 
 ```bash
